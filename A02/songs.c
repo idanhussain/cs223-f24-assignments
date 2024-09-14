@@ -35,7 +35,7 @@ int getSongId() {
 		if (id < 0 || id > 3) {
 			printf("\n%d is an invalid id. ", id);
 		}
-	} while (id < 0 || id > 3); // runs this code until user enters a valid ID
+	} while (id < 0 || id > 3);
 
 	return id;
 }
@@ -49,25 +49,25 @@ void editSong(Song *song) {
 		char newArtist[32];
 		printf("Enter a new artist: ");
 		scanf(" %[^\n]%*c", newArtist);
-		strcpy(song->artist, newArtist);  // Use song->artist instead of song[songId].artist
+		strcpy(song->artist, newArtist);
 	} else if (strcmp(attribute, "title") == 0) {
 		char newTitle[32];
 		printf("Enter a new title: ");
 		scanf(" %[^\n]%*c", newTitle);
-		strcpy(song->title, newTitle);  // Use song->title instead of song[songId].title
+		strcpy(song->title, newTitle);
 	} else if (strcmp(attribute, "duration") == 0) {
 		int newMinutes, newSeconds;
 		printf("Enter new duration (minutes): ");
 		scanf(" %d%*c", &newMinutes);
 		printf("Enter new duration (seconds): ");
 		scanf(" %d%*c", &newSeconds);
-		song->minutes = newMinutes;  // Use song->minutes instead of song[songId].minutes
-		song->seconds = newSeconds;  // Use song->seconds instead of song[songId].seconds
+		song->minutes = newMinutes;
+		song->seconds = newSeconds;  
 	} else if (strcmp(attribute, "danceability") == 0) {
 		float newDanceability;
 		printf("Enter new danceability: ");
 		scanf(" %f%*c", &newDanceability);
-		song->danceability = newDanceability;  // Use song->danceability instead of song[songId].danceability
+		song->danceability = newDanceability;
 	} else {
 		printf("\nInvalid attribute.\n\n");
 		exit(0);
@@ -89,7 +89,7 @@ int main() {
 	int songId = getSongId();
 	Song* selectedSong = &songs[songId];
 
-	editSong(selectedSong);  // No need to pass songId now
+	editSong(selectedSong);
 	displaySongs(songs);
 
 	return 0;
