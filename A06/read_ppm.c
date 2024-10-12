@@ -1,7 +1,7 @@
 /*----------------------------------------------
  * Author: Idan Hussain 
  * Date: October 11 2024
- * This program reads a PPM in a 2D array 
+ * This program reads a PPM in a 1D array 
  ---------------------------------------------*/
 #include <stdio.h>
 #include <stdlib.h>

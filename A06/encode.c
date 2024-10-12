@@ -9,6 +9,12 @@
 #include "read_ppm.h"
 #include "write_ppm.h"
 
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include "read_ppm.h"
+#include "write_ppm.h"
+
 int main(int argc, char** argv) {
 	if (argc != 2) {
 		printf("usage: encode <file.ppm>\n");
@@ -39,24 +45,39 @@ int main(int argc, char** argv) {
 		return 1;
 	}
 
+	int char_index = 0;
 	int bit_index = 0;
-	for (int i = 0; i < width * height * 3; i++) {
-		if (bit_index / 8 < strlen(message) + 1) {
-			unsigned char bit = (message[bit_index / 8] >> (bit_index % 8)) & 1;
+	for (int i = 0; i < width * height; i++) {
+		if (char_index > strlen(message)) break;
 
-			if (i % 3 == 0) {
-				pixels[bit_index / 3].red = (pixels[bit_index / 3].red & ~1) | bit;
-			} else if (i % 3 == 1) {
-				pixels[bit_index / 3].green = (pixels[bit_index / 3].green & ~1) | bit;
-			} else {
-				pixels[bit_index / 3].blue = (pixels[bit_index / 3].blue & ~1) | bit;
-			}
-			bit_index++;
-		} else {
-			break;
+		pixels[i].red &= 0xFE;
+		pixels[i].green &= 0xFE;
+		pixels[i].blue &= 0xFE;
+
+		// Red
+		pixels[i].red |= (message[char_index] >> (7 - bit_index)) & 1;
+		if (++bit_index == 8) {
+			bit_index = 0;
+			char_index++;
+		}
+		if (char_index >= strlen(message)) break;
+
+		// Green		
+		pixels[i].green |= (message[char_index] >> (7 - bit_index)) & 1;
+		if (++bit_index == 8) {
+			bit_index = 0;
+			char_index++;
+		}
+		if (char_index >= strlen(message)) break;
+
+		// Blue
+		pixels[i].blue |= (message[char_index] >> (7 - bit_index)) & 1;
+		if (++bit_index == 8) {
+			bit_index = 0;
+			char_index++;
 		}
 	}
-	
+
 	char new_filename[256];
 	char *dot = strrchr(argv[1], '.');
 	if (dot) {
