@@ -1,3 +1,9 @@
+/*----------------------------------------------
+ * Author: Idan Hussain
+ * Date: November 14 2024
+ * This program outputs a PPM image of the Buddhabrot using multiple threads.
+ ---------------------------------------------*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
