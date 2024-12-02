@@ -8,7 +8,7 @@ FLAGS=-g -Wall -Wvla -Werror -Wno-unused-variable -Wno-unused-but-set-variable
 all: $(TARGET)
 
 $(TARGET) :: $(SOURCES)
-	$(CC) $(FLAGS) $< -o $@ 
+	$(CC) $(FLAGS) $< -o $@ -lpthread -lm
 
 clean:
 	rm -rf $(TARGET)
