@@ -1,3 +1,9 @@
+/*----------------------------------------------
+ * Author: Idan Hussain
+ * Date: December 6 2024
+ * This program prints malloc statistics
+ ---------------------------------------------*/
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
